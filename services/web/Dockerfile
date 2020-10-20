@@ -18,7 +18,7 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt requirements.txt
 
 
-RUN pip install -r requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 
 COPY setup.py setup.py
