@@ -22,7 +22,7 @@ RUN pip install -r requirements.txt
 
 
 COPY setup.py setup.py
-COPY pyparcel/__init__.py /pyparcel/__init__.py
+COPY pyparcel/__init__.py pyparcel/__init__.py
 RUN pip install -e .
 
 # There's probably a way to install everything at once but this works
