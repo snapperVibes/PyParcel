@@ -46,6 +46,10 @@ pythonenv*
 
 # Project specific ignores
 *_parcelids.json
+
+dev2.yml
+
 # Production
 prod.*
-
+raw_prod.*
+./docker-compose.yml

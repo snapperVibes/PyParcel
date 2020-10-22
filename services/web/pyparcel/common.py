@@ -46,7 +46,9 @@ BOT_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
 DB_NAME = os.environ.get("POSTGRES_DB")
 DB_PORT = os.environ.get("POSTGRES_PORT")
 # https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
-DB_URI = f"postgresql://{BOT_NAME}:{BOT_PASSWORD}@db:{DB_PORT}/{DB_NAME}"
+# Todo: When NGINX is working, use the commented out DB_URI?
+# DB_URI = f"postgresql://{BOT_NAME}:{BOT_PASSWORD}@db:{DB_PORT}/{DB_NAME}"
+DB_URI = f"postgresql://{BOT_NAME}:{BOT_PASSWORD}@localhost:{DB_PORT}/{DB_NAME}"
 
 # Output directories
 PARCEL_ID_LISTS = "parcelidlists"

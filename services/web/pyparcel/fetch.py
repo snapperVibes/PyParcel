@@ -167,5 +167,15 @@ def record_using_parid(parid: str) -> dict:
     )
     req = requests.get(wprdc_url)
     response = json.loads(req.text)
-    records = response["records"]
+    records = response["result"]["records"]
+
+
+    if len(records) > 1:
+        raise RuntimeError(
+            "Parcel ids are thought to be mapped to a single property.\n"
+            "If this error occurs AND is not the result of somehow passing two or more"
+            "parcel ids to this function, that underlying thought must be wrong.\n\n"
+            "THIS MEANS THE CODE NEEDS REWRITTEN."
+        )
+
     return records[0]

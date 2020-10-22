@@ -94,7 +94,7 @@ def pyparcel(
     error = None
     try:
         # Simple validation. If an argument hasn't been provided, don't do anything.
-        if any in [parcel, each, diff]:
+        if any([parcel, each, diff]):
             pass
         else:
             raise RuntimeError("Please provide the runtime argument 'parcel' or "
@@ -107,10 +107,8 @@ def pyparcel(
 
         if commit:
             print("Data will be committed to the database")
-            # raise RuntimeError("Lorem Ipsum: Code is not production ready")
         else:
             print("Data will NOT be committed.")
-        # print("Port = {}".format(secrets["port"]))
         print(DASHES)
 
         with psycopg2.connect(DB_URI) as conn:
@@ -122,6 +120,10 @@ def pyparcel(
                             "--parcel cannot be passed alongside --each or --diff"
                         )
                     update.parcel(conn, cursor, commit, parid=parcel)
+                    # Python behavior explained:
+                    #   Python still runs the finally clause
+                    #   which overwrites the value "returned" here
+                    return
 
                 # Give the option to iterate over ALL municipalities
                 if municode is None:

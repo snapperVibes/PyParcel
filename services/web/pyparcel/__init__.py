@@ -17,9 +17,10 @@ try:
 
         @app.route("/", methods=["GET"])
         def home():
-            return "<h1>PyParcel API</h1><p>Were you searching for <i>/api/v1/pyparcel</i>?</p>"
+            return "Welcome to the PyParcel API! Were you searching for /api/pyparcel?\n"
 
-        @app.route("/api/v1/pyparcel", methods=["GET"])
+
+        @app.route("/api/pyparcel", methods=["GET"])
         def pyparcel_api():
             req = request.args
 
@@ -38,13 +39,24 @@ try:
                     args[param] = params[param]
 
             response = pyparcel(**args)
-            # Todo: Response to xml
             return jsonify(response)
+
+
+        @app.route("/test_internet", methods=["GET"])
+        def test_internet():
+            import requests
+            try:
+                requests.get("https://google.com")
+                return "Yay! This program seems to be able to connect to the internet!\n"
+            except requests.exceptions.SSLError:
+                return "Oh no, an SSL Error\n"
+
 
         return app
 
 
     app = _create_app()
+
 except ImportError:
     # The Dockerfile can't create the app until the requirements are installed
     # Even then, you would need to use "from pyparcel.run import pyparcel"
